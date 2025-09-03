@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modalane - Fashion That Defines You</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    header { background: black; color: white; padding: 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5em; letter-spacing: 2px; }
+    nav { background: #333; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { color: #FFD700; }
+    section { padding: 40px; text-align: center; }
+    section h2 { font-size: 2em; margin-bottom: 20px; }
+    .products { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .product { background: white; border-radius: 10px; padding: 20px; width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .product img { width: 100%; border-radius: 10px; }
+    .product h3 { margin: 10px 0 5px; }
+    .product p { margin: 0; color: #555; }
+    .btn { display: inline-block; margin-top: 10px; padding: 10px 15px; background: black; color: white; border-radius: 5px; text-decoration: none; }
+    .btn:hover { background: #FFD700; color: black; }
+    footer { background: black; color: white; padding: 20px; text-align: center; margin-top: 30px; }
+    /* Cart Modal */
+    #cart { display: none; position: fixed; top: 0; right: 0; width: 300px; height: 100%; background: white; box-shadow: -2px 0 5px rgba(0,0,0,0.3); padding: 20px; overflow-y: auto; }
+    #cart h2 { margin-top: 0; }
+    #cart-items { margin: 10px 0; }
+    .cart-item { display: flex; justify-content: space-between; margin: 5px 0; }
+    .close-btn { background: red; color: white; border: none; padding: 5px 10px; cursor: pointer; float: right; }
+    form { display: flex; flex-direction: column; max-width: 400px; margin: auto; }
+    form input, form textarea { margin: 10px 0; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    form button { padding: 10px; background: black; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    form button:hover { background: #FFD700; color: black; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MODALANE</h1>
+    <p>Fashion That Defines You</p>
+    <button class="btn" onclick="openCart()">🛒 Cart</button>
+  </header>
+
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="shop">
+    <h2>Featured Collection</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/250x300.png?text=T-Shirt" alt="T-Shirt">
+        <h3>Classic T-Shirt</h3>
+        <p>₹799</p>
+        <a href="#" class="btn" onclick="addToCart('Classic T-Shirt',799)">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/250x300.png?text=Hoodie" alt="Hoodie">
+        <h3>Winter Hoodie</h3>
+        <p>₹1,499</p>
+        <a href="#" class="btn" onclick="addToCart('Winter Hoodie',1499)">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/250x300.png?text=Jacket" alt="Jacket">
+        <h3>Denim Jacket</h3>
+        <p>₹2,199</p>
+        <a href="#" class="btn" onclick="addToCart('Denim Jacket',2199)">Add to Cart</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Modalane</h2>
+    <p>At Modalane, we believe fashion is more than just clothing – it’s your identity. Our mission is to create timeless designs with premium quality fabrics that empower confidence and style.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Modalane. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div id="cart">
+    <button class="close-btn" onclick="closeCart()">X</button>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p><strong>Total: ₹<span id="cart-total">0</span></strong></p>
+  </div>
+
+  <script>
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({name, price});
+      alert(name + " added to cart!");
+      updateCart();
+    }
+    function updateCart() {
+      let itemsDiv = document.getElementById('cart-items');
+      let total = 0;
+      itemsDiv.innerHTML = "";
+      cart.forEach(item => {
+        total += item.price;
+        itemsDiv.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>₹${item.price}</span></div>`;
+      });
+      document.getElementById('cart-total').innerText = total;
+    }
+    function openCart() {
+      document.getElementById('cart').style.display = "block";
+    }
+    function closeCart() {
+      document.getElementById('cart').style.display = "none";
+    }
+  </script>
+</body>
+</html>
+

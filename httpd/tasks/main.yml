@@ -1,0 +1,14 @@
+---
+# tasks file for httpd
+- name: install apache2 web server httpd using ubuntu
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+- name: copy file from terminal and assining owner,group,permissions.
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html
+    owner: root
+    group: root 
+    mode: "0744"
+
